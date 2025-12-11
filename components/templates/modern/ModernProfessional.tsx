@@ -1,5 +1,5 @@
-import { ResumeData, StyleConfig } from '@/lib/types/resume';
-import { format } from 'date-fns';
+import { ResumeData, StyleConfig } from "@/lib/types/resume";
+import { format } from "date-fns";
 
 interface Props {
   data: ResumeData;
@@ -7,7 +7,15 @@ interface Props {
 }
 
 export default function ModernProfessional({ data, style }: Props) {
-  const { personalInfo, experience, education, skills, certifications } = data;
+  const {
+    personalInfo,
+    experience,
+    education,
+    skills,
+    certifications,
+    awards,
+    hobbies,
+  } = data;
   const { colors, fontSize, fontFamily } = style;
 
   return (
@@ -20,7 +28,10 @@ export default function ModernProfessional({ data, style }: Props) {
       }}
     >
       {/* Header */}
-      <header className="border-b-4 pb-6 mb-8" style={{ borderColor: colors.primary }}>
+      <header
+        className="border-b-4 pb-6 mb-8"
+        style={{ borderColor: colors.primary }}
+      >
         <h1
           className="font-bold mb-2"
           style={{ fontSize: `${fontSize.name}px`, color: colors.primary }}
@@ -77,12 +88,15 @@ export default function ModernProfessional({ data, style }: Props) {
                     >
                       {exp.position}
                     </h4>
-                    <p className="font-medium" style={{ color: colors.secondary }}>
+                    <p
+                      className="font-medium"
+                      style={{ color: colors.secondary }}
+                    >
                       {exp.company} {exp.location && `• ${exp.location}`}
                     </p>
                   </div>
                   <span className="text-sm" style={{ color: colors.secondary }}>
-                    {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
+                    {exp.startDate} - {exp.current ? "Present" : exp.endDate}
                   </span>
                 </div>
                 <ul className="list-disc list-inside space-y-1 ml-2">
@@ -144,7 +158,7 @@ export default function ModernProfessional({ data, style }: Props) {
             {skills.map((skillGroup, idx) => (
               <div key={idx}>
                 <span className="font-semibold">{skillGroup.category}: </span>
-                <span>{skillGroup.items.join(', ')}</span>
+                <span>{skillGroup.items.join(", ")}</span>
               </div>
             ))}
           </div>
@@ -153,7 +167,7 @@ export default function ModernProfessional({ data, style }: Props) {
 
       {/* Certifications */}
       {certifications.length > 0 && (
-        <section>
+        <section className="mb-8">
           <h3
             className="font-bold mb-4 uppercase tracking-wide"
             style={{ fontSize: `${fontSize.heading}px`, color: colors.primary }}
@@ -163,10 +177,54 @@ export default function ModernProfessional({ data, style }: Props) {
           <ul className="space-y-2">
             {certifications.map((cert) => (
               <li key={cert.id}>
-                <span className="font-semibold">{cert.name}</span> - {cert.issuer} ({cert.date})
+                <span className="font-semibold">{cert.name}</span> -{" "}
+                {cert.issuer} ({cert.date})
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {/* Awards & Honors */}
+      {awards && awards.length > 0 && (
+        <section className="mb-8">
+          <h3
+            className="font-bold mb-4 uppercase tracking-wide"
+            style={{ fontSize: `${fontSize.heading}px`, color: colors.primary }}
+          >
+            Awards & Honors
+          </h3>
+          <ul className="space-y-2">
+            {awards.map((award, idx) => (
+              <li key={idx}>
+                <span className="font-semibold">{award.title}</span> -{" "}
+                {award.issuer} ({award.date})
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Hobbies & Interests */}
+      {hobbies && hobbies.length > 0 && (
+        <section>
+          <h3
+            className="font-bold mb-4 uppercase tracking-wide"
+            style={{ fontSize: `${fontSize.heading}px`, color: colors.primary }}
+          >
+            Hobbies & Interests
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {hobbies.map((hobby, idx) => (
+              <span
+                key={idx}
+                className="inline-flex items-center px-3 py-1 rounded-full text-sm border"
+                style={{ borderColor: colors.primary, color: colors.primary }}
+              >
+                {hobby}
+              </span>
+            ))}
+          </div>
         </section>
       )}
     </div>

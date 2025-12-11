@@ -6,7 +6,15 @@ interface Props {
 }
 
 export default function TwoColumnModern({ data, style }: Props) {
-  const { personalInfo, experience, education, skills, certifications } = data;
+  const {
+    personalInfo,
+    experience,
+    education,
+    skills,
+    certifications,
+    awards,
+    hobbies,
+  } = data;
   const { colors, fontSize, fontFamily } = style;
 
   return (
@@ -94,7 +102,7 @@ export default function TwoColumnModern({ data, style }: Props) {
 
         {/* Certifications */}
         {certifications.length > 0 && (
-          <section>
+          <section className="mb-8">
             <h3 className="font-bold text-sm uppercase mb-3 border-b-2 border-white pb-2">
               Certifications
             </h3>
@@ -105,6 +113,43 @@ export default function TwoColumnModern({ data, style }: Props) {
                   <p className="text-xs opacity-80">{cert.issuer}</p>
                   <p className="text-xs opacity-80">{cert.date}</p>
                 </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Awards & Honors */}
+        {awards && awards.length > 0 && (
+          <section className="mb-8">
+            <h3 className="font-bold text-sm uppercase mb-3 border-b-2 border-white pb-2">
+              Awards
+            </h3>
+            <div className="space-y-3">
+              {awards.map((award, idx) => (
+                <div key={idx} className="text-sm">
+                  <p className="font-semibold">{award.title}</p>
+                  <p className="text-xs opacity-80">{award.issuer}</p>
+                  <p className="text-xs opacity-80">{award.date}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Hobbies & Interests */}
+        {hobbies && hobbies.length > 0 && (
+          <section>
+            <h3 className="font-bold text-sm uppercase mb-3 border-b-2 border-white pb-2">
+              Interests
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {hobbies.map((hobby, idx) => (
+                <span
+                  key={idx}
+                  className="text-xs bg-white/20 px-2 py-1 rounded"
+                >
+                  {hobby}
+                </span>
               ))}
             </div>
           </section>

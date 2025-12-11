@@ -1,4 +1,4 @@
-import { ResumeData, StyleConfig } from '@/lib/types/resume';
+import { ResumeData, StyleConfig } from "@/lib/types/resume";
 
 interface Props {
   data: ResumeData;
@@ -6,7 +6,15 @@ interface Props {
 }
 
 export default function ATSFriendly({ data, style }: Props) {
-  const { personalInfo, experience, education, skills, certifications } = data;
+  const {
+    personalInfo,
+    experience,
+    education,
+    skills,
+    certifications,
+    awards,
+    hobbies,
+  } = data;
   const { colors, fontSize, fontFamily } = style;
 
   // ATS-friendly resumes should use simple, clean formatting
@@ -17,10 +25,10 @@ export default function ATSFriendly({ data, style }: Props) {
     <div
       className="w-[210mm] min-h-[297mm] bg-white p-16 shadow-lg"
       style={{
-        fontFamily: 'Arial, sans-serif', // ATS prefers standard fonts
-        fontSize: '11pt',
-        color: '#000000', // Pure black for best ATS scanning
-        lineHeight: '1.5',
+        fontFamily: "Arial, sans-serif", // ATS prefers standard fonts
+        fontSize: "11pt",
+        color: "#000000", // Pure black for best ATS scanning
+        lineHeight: "1.5",
       }}
     >
       {/* Header - Simple and Clean */}
@@ -28,14 +36,14 @@ export default function ATSFriendly({ data, style }: Props) {
         <h1
           className="font-bold mb-1"
           style={{
-            fontSize: '24pt',
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
+            fontSize: "24pt",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
           }}
         >
           {personalInfo.name}
         </h1>
-        <div className="mb-2" style={{ fontSize: '12pt' }}>
+        <div className="mb-2" style={{ fontSize: "12pt" }}>
           {personalInfo.title}
         </div>
         <div className="flex justify-center flex-wrap gap-3 text-sm">
@@ -70,7 +78,7 @@ export default function ATSFriendly({ data, style }: Props) {
           {skills.map((skillGroup, idx) => (
             <div key={idx} className="mb-2">
               <span className="font-bold">{skillGroup.category}: </span>
-              <span>{skillGroup.items.join(' • ')}</span>
+              <span>{skillGroup.items.join(" • ")}</span>
             </div>
           ))}
         </section>
@@ -90,7 +98,7 @@ export default function ATSFriendly({ data, style }: Props) {
                     {exp.position} | {exp.company}
                   </h3>
                   <span className="font-bold">
-                    {exp.startDate} - {exp.current ? 'Present' : exp.endDate}
+                    {exp.startDate} - {exp.current ? "Present" : exp.endDate}
                   </span>
                 </div>
                 {exp.location && (
@@ -129,9 +137,7 @@ export default function ATSFriendly({ data, style }: Props) {
                 {edu.location && <div className="text-sm">{edu.location}</div>}
                 {edu.gpa && <div className="text-sm">GPA: {edu.gpa}</div>}
                 {edu.honors && edu.honors.length > 0 && (
-                  <div className="text-sm">
-                    Honors: {edu.honors.join(', ')}
-                  </div>
+                  <div className="text-sm">Honors: {edu.honors.join(", ")}</div>
                 )}
               </div>
             ))}
@@ -140,7 +146,7 @@ export default function ATSFriendly({ data, style }: Props) {
       )}
 
       {/* Certifications */}
-      {certifications.length > 0 && (
+      {certifications && certifications.length > 0 && (
         <section className="mb-6">
           <h2 className="font-bold text-base uppercase mb-2 border-b border-black pb-1">
             CERTIFICATIONS & LICENSES
@@ -148,7 +154,7 @@ export default function ATSFriendly({ data, style }: Props) {
           <div className="space-y-2">
             {certifications.map((cert) => (
               <div key={cert.id}>
-                <span className="font-bold">{cert.name}</span> - {cert.issuer},{' '}
+                <span className="font-bold">{cert.name}</span> - {cert.issuer},{" "}
                 {cert.date}
                 {cert.credentialId && (
                   <span className="text-sm ml-2">
@@ -161,11 +167,36 @@ export default function ATSFriendly({ data, style }: Props) {
         </section>
       )}
 
+      {/* Awards & Honors */}
+      {awards && awards.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base uppercase mb-2 border-b border-black pb-1">
+            AWARDS & HONORS
+          </h2>
+          <div className="space-y-2">
+            {awards.map((award, idx) => (
+              <div key={idx}>
+                <span className="font-bold">{award.title}</span> -{" "}
+                {award.issuer}, {award.date}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Hobbies & Interests */}
+      {hobbies && hobbies.length > 0 && (
+        <section className="mb-6">
+          <h2 className="font-bold text-base uppercase mb-2 border-b border-black pb-1">
+            INTERESTS
+          </h2>
+          <div>{hobbies.join(", ")}</div>
+        </section>
+      )}
+
       {/* Additional Sections that ATS systems look for */}
-      <div className="mt-8 text-xs text-center" style={{ color: '#666666' }}>
-        <p>
-          KEYWORDS: {skills.flatMap(s => s.items).join(', ')}
-        </p>
+      <div className="mt-8 text-xs text-center" style={{ color: "#666666" }}>
+        <p>KEYWORDS: {skills.flatMap((s) => s.items).join(", ")}</p>
       </div>
     </div>
   );

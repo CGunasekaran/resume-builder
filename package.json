@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.36.2",
     "@react-pdf/renderer": "^4.3.1",
+    "@types/html2canvas": "^0.5.35",
     "@types/pdf-parse": "^1.1.5",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
