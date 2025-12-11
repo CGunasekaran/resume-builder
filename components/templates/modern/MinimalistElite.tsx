@@ -13,6 +13,8 @@ export default function MinimalistElite({ data, style }: Props) {
     skills,
     certifications,
     projects,
+    awards,
+    hobbies,
   } = data;
   const { colors, fontSize, fontFamily } = style;
 
@@ -274,8 +276,8 @@ export default function MinimalistElite({ data, style }: Props) {
             )}
 
             {/* Certifications */}
-            {certifications.length > 0 && (
-              <section>
+            {certifications && certifications.length > 0 && (
+              <section className="mb-8">
                 <h2
                   className="text-xs uppercase tracking-widest mb-4 font-medium"
                   style={{ color: colors.primary, letterSpacing: "0.15em" }}
@@ -301,6 +303,65 @@ export default function MinimalistElite({ data, style }: Props) {
                         {cert.date}
                       </p>
                     </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Awards & Honors */}
+            {awards && awards.length > 0 && (
+              <section className="mb-8">
+                <h2
+                  className="text-xs uppercase tracking-widest mb-4 font-medium"
+                  style={{ color: colors.primary, letterSpacing: "0.15em" }}
+                >
+                  Awards & Honors
+                </h2>
+                <div className="space-y-3">
+                  {awards.map((award, idx) => (
+                    <div key={idx}>
+                      <h3 className="font-semibold text-sm mb-1">
+                        {award.title}
+                      </h3>
+                      <p
+                        className="text-xs"
+                        style={{ color: colors.secondary }}
+                      >
+                        {award.issuer}
+                      </p>
+                      <p
+                        className="text-xs"
+                        style={{ color: colors.secondary }}
+                      >
+                        {award.date}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Hobbies & Interests */}
+            {hobbies && hobbies.length > 0 && (
+              <section>
+                <h2
+                  className="text-xs uppercase tracking-widest mb-4 font-medium"
+                  style={{ color: colors.primary, letterSpacing: "0.15em" }}
+                >
+                  Interests
+                </h2>
+                <div className="flex flex-wrap gap-1">
+                  {hobbies.map((hobby, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs px-2 py-1 rounded"
+                      style={{
+                        backgroundColor: `${colors.primary}10`,
+                        color: colors.primary,
+                      }}
+                    >
+                      {hobby}
+                    </span>
                   ))}
                 </div>
               </section>

@@ -4,33 +4,33 @@ import { useResumeStore } from "@/lib/store/resumeStore";
 import { useState } from "react";
 import { FiPlus, FiTrash2 } from "react-icons/fi";
 
-export default function EducationEditor() {
-  const { resumeData, addEducation, updateEducation, deleteEducation } =
-    useResumeStore();
-  const [newEdu, setNewEdu] = useState({
-    institution: "",
-    degree: "",
-    field: "",
-    location: "",
-    startDate: "",
-    graduationDate: "",
-    gpa: "",
+export default function CertificationsEditor() {
+  const {
+    resumeData,
+    addCertification,
+    updateCertification,
+    deleteCertification,
+  } = useResumeStore();
+  const [newCert, setNewCert] = useState({
+    name: "",
+    issuer: "",
+    date: "",
+    expiryDate: "",
+    credentialId: "",
   });
 
-  const handleAddEducation = () => {
-    if (newEdu.institution && newEdu.degree) {
-      addEducation({
+  const handleAddCertification = () => {
+    if (newCert.name && newCert.issuer) {
+      addCertification({
         id: Date.now().toString(),
-        ...newEdu,
+        ...newCert,
       });
-      setNewEdu({
-        institution: "",
-        degree: "",
-        field: "",
-        location: "",
-        startDate: "",
-        graduationDate: "",
-        gpa: "",
+      setNewCert({
+        name: "",
+        issuer: "",
+        date: "",
+        expiryDate: "",
+        credentialId: "",
       });
     }
   };
@@ -38,11 +38,11 @@ export default function EducationEditor() {
   return (
     <div className="relative">
       {/* Glowing Card Effect */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl blur opacity-20"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-2xl blur opacity-20"></div>
 
       <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
             <svg
               className="w-5 h-5 text-white"
               fill="none"
@@ -53,163 +53,147 @@ export default function EducationEditor() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M12 14l9-5-9-5-9 5 9 5z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
               />
             </svg>
           </div>
           <h4 className="text-lg font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Education
+            Certifications
           </h4>
         </div>
 
         <div className="space-y-6">
-          {/* Existing Education */}
-          {resumeData.education.map((edu) => (
+          {/* Existing Certifications */}
+          {resumeData.certifications.map((cert) => (
             <div
-              key={edu.id}
+              key={cert.id}
               className="border border-white/30 rounded-xl p-5 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-200"
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1 grid grid-cols-2 gap-3">
                   <input
                     type="text"
-                    value={edu.institution}
+                    value={cert.name}
                     onChange={(e) =>
-                      updateEducation(edu.id, { institution: e.target.value })
+                      updateCertification(cert.id, { name: e.target.value })
                     }
-                    placeholder="Institution Name"
+                    placeholder="Certification Name"
                     className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
                   />
                   <input
                     type="text"
-                    value={edu.degree}
+                    value={cert.issuer}
                     onChange={(e) =>
-                      updateEducation(edu.id, { degree: e.target.value })
+                      updateCertification(cert.id, { issuer: e.target.value })
                     }
-                    placeholder="Degree"
+                    placeholder="Issuing Organization"
                     className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
                   />
                 </div>
                 <button
-                  onClick={() => deleteEducation(edu.id)}
+                  onClick={() => deleteCertification(cert.id)}
                   className="ml-3 p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-xl transition-all duration-200 backdrop-blur-sm"
                 >
                   <FiTrash2 />
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <input
-                  type="text"
-                  value={edu.field}
-                  onChange={(e) =>
-                    updateEducation(edu.id, { field: e.target.value })
-                  }
-                  placeholder="Field of Study"
-                  className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
-                />
-                <input
-                  type="text"
-                  value={edu.location || ""}
-                  onChange={(e) =>
-                    updateEducation(edu.id, { location: e.target.value })
-                  }
-                  placeholder="Location"
-                  className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
-                />
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3 mb-3">
                 <input
                   type="date"
-                  value={edu.startDate}
+                  value={cert.date}
                   onChange={(e) =>
-                    updateEducation(edu.id, { startDate: e.target.value })
+                    updateCertification(cert.id, { date: e.target.value })
                   }
-                  placeholder="Start Date"
+                  placeholder="Issue Date"
                   className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
                 />
                 <input
                   type="date"
-                  value={edu.graduationDate}
+                  value={cert.expiryDate || ""}
                   onChange={(e) =>
-                    updateEducation(edu.id, { graduationDate: e.target.value })
+                    updateCertification(cert.id, { expiryDate: e.target.value })
                   }
-                  placeholder="Graduation Date"
+                  placeholder="Expiry Date (optional)"
                   className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
                 />
                 <input
                   type="text"
-                  value={edu.gpa || ""}
+                  value={cert.credentialId || ""}
                   onChange={(e) =>
-                    updateEducation(edu.id, { gpa: e.target.value })
+                    updateCertification(cert.id, {
+                      credentialId: e.target.value,
+                    })
                   }
-                  placeholder="GPA (optional)"
+                  placeholder="Credential ID (optional)"
                   className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
                 />
               </div>
             </div>
           ))}
 
-          {/* Add New Education */}
+          {/* Add New Certification */}
           <div className="border border-dashed border-white/30 rounded-xl p-6 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-200">
             <h5 className="text-sm font-medium text-gray-200 mb-4">
-              Add New Education
+              Add New Certification
             </h5>
             <div className="grid grid-cols-2 gap-3 mb-4">
               <input
                 type="text"
-                value={newEdu.institution}
+                value={newCert.name}
                 onChange={(e) =>
-                  setNewEdu({ ...newEdu, institution: e.target.value })
+                  setNewCert({ ...newCert, name: e.target.value })
                 }
-                placeholder="Institution Name"
+                placeholder="Certification Name"
                 className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
               />
               <input
                 type="text"
-                value={newEdu.degree}
+                value={newCert.issuer}
                 onChange={(e) =>
-                  setNewEdu({ ...newEdu, degree: e.target.value })
+                  setNewCert({ ...newCert, issuer: e.target.value })
                 }
-                placeholder="Degree"
+                placeholder="Issuing Organization"
                 className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="grid grid-cols-3 gap-3 mb-4">
               <input
-                type="text"
-                value={newEdu.field}
+                type="date"
+                value={newCert.date}
                 onChange={(e) =>
-                  setNewEdu({ ...newEdu, field: e.target.value })
+                  setNewCert({ ...newCert, date: e.target.value })
                 }
-                placeholder="Field of Study"
+                placeholder="Issue Date"
+                className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+              />
+              <input
+                type="date"
+                value={newCert.expiryDate}
+                onChange={(e) =>
+                  setNewCert({ ...newCert, expiryDate: e.target.value })
+                }
+                placeholder="Expiry Date (optional)"
                 className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
               />
               <input
                 type="text"
-                value={newEdu.location}
+                value={newCert.credentialId}
                 onChange={(e) =>
-                  setNewEdu({ ...newEdu, location: e.target.value })
+                  setNewCert({ ...newCert, credentialId: e.target.value })
                 }
-                placeholder="Location"
+                placeholder="Credential ID (optional)"
                 className="px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
               />
             </div>
 
             <button
-              onClick={handleAddEducation}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl backdrop-blur-sm font-medium"
+              onClick={handleAddCertification}
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 text-white rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl backdrop-blur-sm font-medium"
             >
               <FiPlus />
-              Add Education
+              Add Certification
             </button>
           </div>
         </div>

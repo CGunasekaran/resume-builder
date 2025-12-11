@@ -1,128 +1,163 @@
-import React from "react";
+"use client";
 
-export default function Builder() {
+import { useState } from "react";
+import TemplateRenderer from "@/components/templates/TemplateRenderer";
+import TemplateSelector from "@/components/templates/TemplateSelector";
+import FileUploader from "@/components/upload/FileUploader";
+import StyleControls from "@/components/editor/StyleControls";
+import PersonalInfoEditor from "@/components/editor/PersonalInfoEditor";
+import ExperienceEditor from "@/components/editor/ExperienceEditor";
+import SkillsEditor from "@/components/editor/SkillsEditor";
+import EducationEditor from "@/components/editor/EducationEditor";
+import CertificationsEditor from "@/components/editor/CertificationsEditor";
+import AwardsEditor from "@/components/editor/AwardsEditor";
+import HobbiesEditor from "@/components/editor/HobbiesEditor";
+import {
+  FiLayout,
+  FiUpload,
+  FiDownload,
+  FiEye,
+  FiSettings,
+} from "react-icons/fi";
+
+export default function BuilderPage() {
+  const [activeTab, setActiveTab] = useState<"edit" | "template" | "style">(
+    "edit"
+  );
+  const [showUploader, setShowUploader] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+      {/* Top Bar */}
+      <header className="relative bg-white/5 backdrop-blur-xl border-b border-white/10 px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Resume Builder
+            </h1>
+            <p className="text-sm text-gray-300">
+              Create your professional resume
+            </p>
+          </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Glowing Card Effect */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25"></div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowUploader(true)}
+              className="flex items-center gap-2 px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-gray-300 hover:bg-white/20 transition-all duration-200"
+            >
+              <FiUpload />
+              Import Resume
+            </button>
 
-        <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl">
-          <div className="px-6 py-8">
-            <div className="flex items-center mb-8">
-              {/* Logo/Brand */}
-              <div className="h-12 w-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg mr-4">
-                <svg
-                  className="h-6 w-6 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                  />
-                </svg>
-              </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Resume Builder
-              </h1>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Editor Section */}
-              <div className="space-y-6">
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
-                  <h2 className="text-xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
-                    Personal Information
-                  </h2>
-                  <div className="space-y-4">
-                    <div className="group">
-                      <label className="block text-sm font-medium text-gray-200 mb-2">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
-                        placeholder="Enter your full name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Enter your email"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Enter your phone number"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                    Experience
-                  </h2>
-                  <p className="text-gray-600 text-sm">
-                    Add your work experience here
-                  </p>
-                  <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                    Add Experience
-                  </button>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                    Education
-                  </h2>
-                  <p className="text-gray-600 text-sm">
-                    Add your education details here
-                  </p>
-                  <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                    Add Education
-                  </button>
-                </div>
-              </div>
-
-              {/* Preview Section */}
-              <div className="bg-white border rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                  Preview
-                </h2>
-                <div className="bg-gray-50 rounded-lg p-8 min-h-96 flex items-center justify-center">
-                  <p className="text-gray-500">
-                    Your resume preview will appear here
-                  </p>
-                </div>
-                <div className="mt-4 flex gap-2">
-                  <button className="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
-                    Download PDF
-                  </button>
-                  <button className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                    Save Resume
-                  </button>
-                </div>
-              </div>
-            </div>
+            <button
+              onClick={() => window.print()}
+              className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <FiDownload />
+              Download PDF
+            </button>
           </div>
         </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="relative flex-1 flex overflow-hidden">
+        {/* Left Sidebar - Controls */}
+        <aside className="w-96 bg-white/5 backdrop-blur-xl border-r border-white/10 overflow-y-auto">
+          {/* Tabs */}
+          <div className="flex border-b border-white/10">
+            <button
+              onClick={() => setActiveTab("edit")}
+              className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+                activeTab === "edit"
+                  ? "border-b-2 border-purple-500 text-purple-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <FiSettings className="inline mr-2" />
+              Edit Content
+            </button>
+            <button
+              onClick={() => setActiveTab("template")}
+              className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+                activeTab === "template"
+                  ? "border-b-2 border-purple-500 text-purple-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <FiLayout className="inline mr-2" />
+              Templates
+            </button>
+            <button
+              onClick={() => setActiveTab("style")}
+              className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+                activeTab === "style"
+                  ? "border-b-2 border-purple-500 text-purple-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <FiEye className="inline mr-2" />
+              Styling
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-6">
+            {activeTab === "edit" && (
+              <div className="space-y-6">
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-2">
+                    Edit Resume Content
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Update your resume information in the sections below.
+                    Changes will be reflected in real-time.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  <PersonalInfoEditor />
+                  <ExperienceEditor />
+                  <EducationEditor />
+                  <SkillsEditor />
+                  <CertificationsEditor />
+                  <AwardsEditor />
+                  <HobbiesEditor />
+                </div>
+              </div>
+            )}
+
+            {activeTab === "template" && <TemplateSelector />}
+
+            {activeTab === "style" && <StyleControls />}
+          </div>
+        </aside>
+
+        {/* Right Side - Preview */}
+        <main className="flex-1 overflow-hidden">
+          <TemplateRenderer />
+        </main>
       </div>
+
+      {/* Modals */}
+      {showUploader && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold">Import Resume</h3>
+              <button
+                onClick={() => setShowUploader(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                ✕
+              </button>
+            </div>
+            <FileUploader />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

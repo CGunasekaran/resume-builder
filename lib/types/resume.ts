@@ -67,6 +67,7 @@ export interface ResumeData {
   projects: Project[];
   languages?: { language: string; proficiency: string }[];
   awards?: { title: string; issuer: string; date: string }[];
+  hobbies?: string[];
 }
 
 export interface StyleConfig {

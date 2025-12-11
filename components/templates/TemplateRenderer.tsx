@@ -22,7 +22,10 @@ export default function TemplateRenderer() {
   return (
     <div className="w-full h-full overflow-auto bg-gray-100 p-8">
       <div className="max-w-[210mm] mx-auto">
-        <TemplateComponent data={resumeData} style={styleConfig} />
+        {/* This ID is crucial for PDF generation */}
+        <div id="resume-preview">
+          <TemplateComponent data={resumeData} style={styleConfig} />
+        </div>
       </div>
     </div>
   );
