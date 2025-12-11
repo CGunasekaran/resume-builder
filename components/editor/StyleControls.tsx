@@ -1,23 +1,53 @@
-'use client';
+"use client";
 
-import { useResumeStore } from '@/lib/store/resumeStore';
-import { FiType, FiLayout } from 'react-icons/fi';
+import { useResumeStore } from "@/lib/store/resumeStore";
+import { FiType, FiLayout } from "react-icons/fi";
 
 const FONTS = [
-  { value: 'inter', label: 'Inter' },
-  { value: 'roboto', label: 'Roboto' },
-  { value: 'playfair', label: 'Playfair Display' },
-  { value: 'montserrat', label: 'Montserrat' },
-  { value: 'lato', label: 'Lato' },
+  { value: "inter", label: "Inter" },
+  { value: "roboto", label: "Roboto" },
+  { value: "playfair", label: "Playfair Display" },
+  { value: "montserrat", label: "Montserrat" },
+  { value: "lato", label: "Lato" },
 ];
 
 const COLOR_PRESETS = [
-  { name: 'Professional Blue', primary: '#2563eb', secondary: '#64748b', accent: '#0ea5e9' },
-  { name: 'Corporate Gray', primary: '#374151', secondary: '#6b7280', accent: '#9ca3af' },
-  { name: 'Creative Purple', primary: '#7c3aed', secondary: '#a78bfa', accent: '#c4b5fd' },
-  { name: 'Modern Green', primary: '#059669', secondary: '#10b981', accent: '#34d399' },
-  { name: 'Bold Red', primary: '#dc2626', secondary: '#ef4444', accent: '#f87171' },
-  { name: 'Elegant Navy', primary: '#1e40af', secondary: '#3b82f6', accent: '#60a5fa' },
+  {
+    name: "Professional Blue",
+    primary: "#2563eb",
+    secondary: "#64748b",
+    accent: "#0ea5e9",
+  },
+  {
+    name: "Corporate Gray",
+    primary: "#374151",
+    secondary: "#6b7280",
+    accent: "#9ca3af",
+  },
+  {
+    name: "Creative Purple",
+    primary: "#7c3aed",
+    secondary: "#a78bfa",
+    accent: "#c4b5fd",
+  },
+  {
+    name: "Modern Green",
+    primary: "#059669",
+    secondary: "#10b981",
+    accent: "#34d399",
+  },
+  {
+    name: "Bold Red",
+    primary: "#dc2626",
+    secondary: "#ef4444",
+    accent: "#f87171",
+  },
+  {
+    name: "Elegant Navy",
+    primary: "#1e40af",
+    secondary: "#3b82f6",
+    accent: "#60a5fa",
+  },
 ];
 
 export default function StyleControls() {
@@ -33,7 +63,9 @@ export default function StyleControls() {
 
       {/* Font Family */}
       <div>
-        <label className="block text-sm font-medium text-gray-200 mb-2">Font Family</label>
+        <label className="block text-sm font-medium text-gray-200 mb-2">
+          Font Family
+        </label>
         <select
           value={styleConfig.fontFamily}
           onChange={(e) =>
@@ -44,7 +76,11 @@ export default function StyleControls() {
           className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-gray-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
         >
           {FONTS.map((font) => (
-            <option key={font.value} value={font.value} className="bg-gray-800 text-white">
+            <option
+              key={font.value}
+              value={font.value}
+              className="bg-gray-800 text-white"
+            >
               {font.label}
             </option>
           ))}
@@ -53,12 +89,16 @@ export default function StyleControls() {
 
       {/* Font Sizes */}
       <div>
-        <label className="block text-sm font-medium text-gray-200 mb-3">Font Sizes</label>
+        <label className="block text-sm font-medium text-gray-200 mb-3">
+          Font Sizes
+        </label>
         <div className="space-y-4">
           <div>
             <div className="flex justify-between text-sm text-gray-300 mb-2">
               <span>Name</span>
-              <span className="font-medium text-white">{styleConfig.fontSize.name}px</span>
+              <span className="font-medium text-white">
+                {styleConfig.fontSize.name}px
+              </span>
             </div>
             <input
               type="range"
@@ -80,7 +120,9 @@ export default function StyleControls() {
           <div>
             <div className="flex justify-between text-sm text-gray-300 mb-2">
               <span>Headings</span>
-              <span className="font-medium text-white">{styleConfig.fontSize.heading}px</span>
+              <span className="font-medium text-white">
+                {styleConfig.fontSize.heading}px
+              </span>
             </div>
             <input
               type="range"
@@ -102,7 +144,9 @@ export default function StyleControls() {
           <div>
             <div className="flex justify-between text-sm text-gray-300 mb-2">
               <span>Body Text</span>
-              <span className="font-medium text-white">{styleConfig.fontSize.body}px</span>
+              <span className="font-medium text-white">
+                {styleConfig.fontSize.body}px
+              </span>
             </div>
             <input
               type="range"
@@ -125,7 +169,9 @@ export default function StyleControls() {
 
       {/* Color Presets */}
       <div>
-        <label className="block text-sm font-medium text-gray-200 mb-3">Color Schemes</label>
+        <label className="block text-sm font-medium text-gray-200 mb-3">
+          Color Schemes
+        </label>
         <div className="grid grid-cols-2 gap-3">
           {COLOR_PRESETS.map((preset) => (
             <button
@@ -156,7 +202,9 @@ export default function StyleControls() {
                   style={{ backgroundColor: preset.accent }}
                 />
               </div>
-              <div className="text-sm font-medium text-gray-200">{preset.name}</div>
+              <div className="text-sm font-medium text-gray-200">
+                {preset.name}
+              </div>
             </button>
           ))}
         </div>
@@ -164,10 +212,14 @@ export default function StyleControls() {
 
       {/* Custom Colors */}
       <div>
-        <label className="block text-sm font-medium text-gray-200 mb-3">Custom Colors</label>
+        <label className="block text-sm font-medium text-gray-200 mb-3">
+          Custom Colors
+        </label>
         <div className="space-y-4">
           <div>
-            <label className="text-sm text-gray-300 block mb-2">Primary Color</label>
+            <label className="text-sm text-gray-300 block mb-2">
+              Primary Color
+            </label>
             <input
               type="color"
               value={styleConfig.colors.primary}
@@ -183,7 +235,9 @@ export default function StyleControls() {
             />
           </div>
           <div>
-            <label className="text-sm text-gray-300 block mb-2">Secondary Color</label>
+            <label className="text-sm text-gray-300 block mb-2">
+              Secondary Color
+            </label>
             <input
               type="color"
               value={styleConfig.colors.secondary}
@@ -199,7 +253,9 @@ export default function StyleControls() {
             />
           </div>
           <div>
-            <label className="text-sm text-gray-300 block mb-2">Accent Color</label>
+            <label className="text-sm text-gray-300 block mb-2">
+              Accent Color
+            </label>
             <input
               type="color"
               value={styleConfig.colors.accent}
@@ -219,9 +275,11 @@ export default function StyleControls() {
 
       {/* Spacing */}
       <div>
-        <label className="block text-sm font-medium text-gray-200 mb-3">Spacing</label>
+        <label className="block text-sm font-medium text-gray-200 mb-3">
+          Spacing
+        </label>
         <div className="grid grid-cols-3 gap-3">
-          {['compact', 'normal', 'relaxed'].map((spacing) => (
+          {["compact", "normal", "relaxed"].map((spacing) => (
             <button
               key={spacing}
               onClick={() =>
@@ -231,8 +289,8 @@ export default function StyleControls() {
               }
               className={`px-4 py-3 rounded-xl font-medium capitalize transition-all duration-200 ${
                 styleConfig.spacing === spacing
-                  ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
-                  : 'bg-white/10 backdrop-blur-sm border border-white/20 text-gray-300 hover:bg-white/20 hover:text-white'
+                  ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 text-gray-300 hover:bg-white/20 hover:text-white"
               }`}
             >
               {spacing}
