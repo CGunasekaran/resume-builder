@@ -44,14 +44,31 @@ export default function ModernProfessional({ data, style }: Props) {
         >
           {personalInfo.title}
         </h2>
-        <div className="flex flex-wrap gap-4 text-sm">
-          {personalInfo.email && <span>{personalInfo.email}</span>}
-          {personalInfo.phone && <span>•</span>}
-          {personalInfo.phone && <span>{personalInfo.phone}</span>}
-          {personalInfo.location && <span>•</span>}
-          {personalInfo.location && <span>{personalInfo.location}</span>}
-          {personalInfo.linkedin && <span>•</span>}
-          {personalInfo.linkedin && <span>{personalInfo.linkedin}</span>}
+        <div
+          className="flex flex-wrap gap-4 text-sm"
+          style={{ color: colors.text, minHeight: "20px" }}
+        >
+          {personalInfo.email && (
+            <span style={{ color: colors.text }}>{personalInfo.email}</span>
+          )}
+          {personalInfo.phone && (
+            <span style={{ color: colors.secondary }}>•</span>
+          )}
+          {personalInfo.phone && (
+            <span style={{ color: colors.text }}>{personalInfo.phone}</span>
+          )}
+          {personalInfo.location && (
+            <span style={{ color: colors.secondary }}>•</span>
+          )}
+          {personalInfo.location && (
+            <span style={{ color: colors.text }}>{personalInfo.location}</span>
+          )}
+          {personalInfo.linkedin && (
+            <span style={{ color: colors.secondary }}>•</span>
+          )}
+          {personalInfo.linkedin && (
+            <span style={{ color: colors.text }}>{personalInfo.linkedin}</span>
+          )}
         </div>
       </header>
 
@@ -64,7 +81,12 @@ export default function ModernProfessional({ data, style }: Props) {
           >
             Professional Summary
           </h3>
-          <p className="leading-relaxed">{personalInfo.summary}</p>
+          <p
+            className="leading-relaxed"
+            style={{ color: colors.text, fontSize: "14px", lineHeight: "1.6" }}
+          >
+            {personalInfo.summary}
+          </p>
         </section>
       )}
 
@@ -99,9 +121,20 @@ export default function ModernProfessional({ data, style }: Props) {
                     {exp.startDate} - {exp.current ? "Present" : exp.endDate}
                   </span>
                 </div>
-                <ul className="list-disc list-inside space-y-1 ml-2">
+                <ul
+                  className="list-disc list-inside space-y-1 ml-2"
+                  style={{ color: colors.text }}
+                >
                   {exp.description.map((desc, idx) => (
-                    <li key={idx} className="leading-relaxed">
+                    <li
+                      key={idx}
+                      className="leading-relaxed"
+                      style={{
+                        color: colors.text,
+                        fontSize: "13px",
+                        lineHeight: "1.5",
+                      }}
+                    >
                       {desc}
                     </li>
                   ))}

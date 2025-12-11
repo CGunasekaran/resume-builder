@@ -69,7 +69,13 @@ export default function TwoColumnModern({ data, style }: Props) {
                     {skillGroup.items.map((skill, skillIdx) => (
                       <span
                         key={skillIdx}
-                        className="text-xs px-2 py-1 bg-white bg-opacity-20 rounded"
+                        className="text-xs px-2 py-1 rounded"
+                        style={{
+                          backgroundColor: "rgba(255,255,255,0.25)",
+                          color: "#ffffff",
+                          fontSize: "11px",
+                          fontWeight: "500",
+                        }}
                       >
                         {skill}
                       </span>
@@ -90,10 +96,30 @@ export default function TwoColumnModern({ data, style }: Props) {
             <div className="space-y-4">
               {education.map((edu) => (
                 <div key={edu.id} className="text-sm">
-                  <p className="font-semibold">{edu.degree}</p>
-                  <p className="opacity-90">{edu.field}</p>
-                  <p className="text-xs opacity-80">{edu.institution}</p>
-                  <p className="text-xs opacity-80">{edu.graduationDate}</p>
+                  <p
+                    className="font-semibold"
+                    style={{ color: "#ffffff", fontSize: "13px" }}
+                  >
+                    {edu.degree}
+                  </p>
+                  <p
+                    style={{
+                      color: "rgba(255,255,255,0.95)",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {edu.field}
+                  </p>
+                  <p
+                    style={{ color: "rgba(255,255,255,0.9)", fontSize: "11px" }}
+                  >
+                    {edu.institution}
+                  </p>
+                  <p
+                    style={{ color: "rgba(255,255,255,0.9)", fontSize: "11px" }}
+                  >
+                    {edu.graduationDate}
+                  </p>
                 </div>
               ))}
             </div>
@@ -146,7 +172,13 @@ export default function TwoColumnModern({ data, style }: Props) {
               {hobbies.map((hobby, idx) => (
                 <span
                   key={idx}
-                  className="text-xs bg-white/20 px-2 py-1 rounded"
+                  className="text-xs px-2 py-1 rounded"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.25)",
+                    color: "#ffffff",
+                    fontSize: "11px",
+                    fontWeight: "500",
+                  }}
                 >
                   {hobby}
                 </span>
@@ -167,7 +199,16 @@ export default function TwoColumnModern({ data, style }: Props) {
             >
               About Me
             </h3>
-            <p className="leading-relaxed">{personalInfo.summary}</p>
+            <p
+              className="leading-relaxed"
+              style={{
+                color: colors.text,
+                fontSize: "14px",
+                lineHeight: "1.6",
+              }}
+            >
+              {personalInfo.summary}
+            </p>
           </section>
         )}
 

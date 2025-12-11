@@ -61,43 +61,79 @@ export default function InfographicStyle({ data, style }: Props) {
               {personalInfo.email && (
                 <div
                   className="p-3 rounded-lg"
-                  style={{ backgroundColor: `${colors.primary}10` }}
+                  style={{
+                    backgroundColor: `${colors.primary}20`,
+                    border: `1px solid ${colors.primary}30`,
+                  }}
                 >
                   <div
                     className="text-xs font-semibold mb-1"
-                    style={{ color: colors.primary }}
+                    style={{ color: colors.primary, fontSize: "11px" }}
                   >
                     EMAIL
                   </div>
-                  <div className="text-xs">{personalInfo.email}</div>
+                  <div
+                    className="text-xs"
+                    style={{
+                      color: colors.text,
+                      fontSize: "12px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {personalInfo.email}
+                  </div>
                 </div>
               )}
               {personalInfo.phone && (
                 <div
                   className="p-3 rounded-lg"
-                  style={{ backgroundColor: `${colors.accent}10` }}
+                  style={{
+                    backgroundColor: `${colors.accent}20`,
+                    border: `1px solid ${colors.accent}30`,
+                  }}
                 >
                   <div
                     className="text-xs font-semibold mb-1"
-                    style={{ color: colors.accent }}
+                    style={{ color: colors.accent, fontSize: "11px" }}
                   >
                     PHONE
                   </div>
-                  <div className="text-xs">{personalInfo.phone}</div>
+                  <div
+                    className="text-xs"
+                    style={{
+                      color: colors.text,
+                      fontSize: "12px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {personalInfo.phone}
+                  </div>
                 </div>
               )}
               {personalInfo.location && (
                 <div
                   className="p-3 rounded-lg"
-                  style={{ backgroundColor: `${colors.secondary}10` }}
+                  style={{
+                    backgroundColor: `${colors.secondary}20`,
+                    border: `1px solid ${colors.secondary}30`,
+                  }}
                 >
                   <div
                     className="text-xs font-semibold mb-1"
-                    style={{ color: colors.secondary }}
+                    style={{ color: colors.secondary, fontSize: "11px" }}
                   >
                     LOCATION
                   </div>
-                  <div className="text-xs">{personalInfo.location}</div>
+                  <div
+                    className="text-xs"
+                    style={{
+                      color: colors.text,
+                      fontSize: "12px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {personalInfo.location}
+                  </div>
                 </div>
               )}
             </div>
@@ -120,7 +156,16 @@ export default function InfographicStyle({ data, style }: Props) {
                 >
                   📊 PROFESSIONAL SUMMARY
                 </h3>
-                <p className="leading-relaxed">{personalInfo.summary}</p>
+                <p
+                  className="leading-relaxed"
+                  style={{
+                    color: colors.text,
+                    fontSize: "14px",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  {personalInfo.summary}
+                </p>
               </div>
             </div>
           </section>
