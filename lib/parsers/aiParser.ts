@@ -1,7 +1,7 @@
-import OpenAI from 'openai';
-import { ResumeData } from '../types/resume';
+import OpenAI from "openai";
+import { ResumeData } from "../types/resume";
 
-const openai = process.env.OPENAI_API_KEY 
+const openai = process.env.OPENAI_API_KEY
   ? new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     })
@@ -9,7 +9,7 @@ const openai = process.env.OPENAI_API_KEY
 
 export async function parseResumeWithAI(text: string): Promise<ResumeData> {
   if (!openai) {
-    throw new Error('OpenAI API key not configured');
+    throw new Error("OpenAI API key not configured");
   }
   const prompt = `
 Extract structured resume information from the following text. Return a JSON object with this exact structure:
@@ -67,29 +67,30 @@ Return ONLY the JSON object, no additional text.
 
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: "gpt-4o-mini",
       messages: [
         {
-          role: 'system',
-          content: 'You are a resume parser that extracts structured data from resumes. Always return valid JSON.',
+          role: "system",
+          content:
+            "You are a resume parser that extracts structured data from resumes. Always return valid JSON.",
         },
         {
-          role: 'user',
+          role: "user",
           content: prompt,
         },
       ],
       temperature: 0.1,
-      response_format: { type: 'json_object' },
+      response_format: { type: "json_object" },
     });
 
     const content = response.choices[0].message.content;
     if (!content) {
-      throw new Error('No response from AI');
+      throw new Error("No response from AI");
     }
 
     return JSON.parse(content) as ResumeData;
   } catch (error) {
-    console.error('AI parsing error:', error);
-    throw new Error('Failed to parse resume with AI');
+    console.error("AI parsing error:", error);
+    throw new Error("Failed to parse resume with AI");
   }
 }
