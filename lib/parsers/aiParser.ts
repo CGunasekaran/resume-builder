@@ -1,11 +1,16 @@
 import OpenAI from 'openai';
 import { ResumeData } from '../types/resume';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = process.env.OPENAI_API_KEY 
+  ? new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
+  : null;
 
 export async function parseResumeWithAI(text: string): Promise<ResumeData> {
+  if (!openai) {
+    throw new Error('OpenAI API key not configured');
+  }
   const prompt = `
 Extract structured resume information from the following text. Return a JSON object with this exact structure:
 
