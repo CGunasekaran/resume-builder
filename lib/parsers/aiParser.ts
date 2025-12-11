@@ -55,9 +55,45 @@ Extract structured resume information from the following text. Return a JSON obj
       "items": ["skill1", "skill2"]
     }
   ],
-  "certifications": [],
-  "projects": []
+  "certifications": [
+    {
+      "id": "unique-id",
+      "name": "",
+      "issuer": "",
+      "date": "YYYY-MM",
+      "expiryDate": "",
+      "credentialId": ""
+    }
+  ],
+  "projects": [
+    {
+      "id": "unique-id",
+      "name": "",
+      "description": "",
+      "technologies": ["tech1", "tech2"],
+      "url": "",
+      "startDate": "YYYY-MM",
+      "endDate": "YYYY-MM"
+    }
+  ],
+  "awards": [
+    {
+      "title": "",
+      "issuer": "",
+      "date": "YYYY-MM"
+    }
+  ],
+  "hobbies": ["hobby1", "hobby2", "hobby3"]
 }
+
+Important instructions:
+- Generate unique IDs for each experience, education, certification, and project entry
+- Extract ALL available information from the resume
+- For dates, use YYYY-MM format or "Present" for current positions
+- Group skills into logical categories (Technical, Programming Languages, Tools, etc.)
+- Extract awards, honors, achievements into the awards array
+- Extract hobbies, interests, personal activities into the hobbies array
+- If a section is not found, return an empty array or object as appropriate
 
 Resume Text:
 ${text}

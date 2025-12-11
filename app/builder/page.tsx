@@ -19,12 +19,28 @@ import {
   FiEye,
   FiSettings,
 } from "react-icons/fi";
+import { generatePDFFromHTML } from "@/lib/utils/pdfGenerator";
 
 export default function BuilderPage() {
   const [activeTab, setActiveTab] = useState<"edit" | "template" | "style">(
     "edit"
   );
   const [showUploader, setShowUploader] = useState(false);
+
+  const handleDownloadPDF = async () => {
+    try {
+      await generatePDFFromHTML("resume-preview", {
+        filename: "my-resume.pdf",
+        quality: 0.95,
+        format: "a4",
+        orientation: "portrait",
+      });
+    } catch (error) {
+      console.error("Failed to generate PDF:", error);
+      // Fallback to print dialog if PDF generation fails
+      window.print();
+    }
+  };
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -52,7 +68,7 @@ export default function BuilderPage() {
             </button>
 
             <button
-              onClick={() => window.print()}
+              onClick={handleDownloadPDF}
               className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
             >
               <FiDownload />
@@ -143,18 +159,12 @@ export default function BuilderPage() {
 
       {/* Modals */}
       {showUploader && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">Import Resume</h3>
-              <button
-                onClick={() => setShowUploader(false)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-            </div>
-            <FileUploader />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="max-w-2xl w-full mx-4">
+            <FileUploader
+              onDataImported={() => setActiveTab("edit")}
+              onClose={() => setShowUploader(false)}
+            />
           </div>
         </div>
       )}

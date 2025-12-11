@@ -6,6 +6,7 @@ interface ResumeStore {
   resumeData: ResumeData;
   styleConfig: StyleConfig;
   setResumeData: (data: Partial<ResumeData>) => void;
+  replaceResumeData: (data: ResumeData) => void;
   setStyleConfig: (config: Partial<StyleConfig>) => void;
   updatePersonalInfo: (info: Partial<ResumeData["personalInfo"]>) => void;
   addExperience: (exp: ResumeData["experience"][0]) => void;
@@ -157,6 +158,11 @@ export const useResumeStore = create<ResumeStore>()(
       setResumeData: (data) =>
         set((state) => ({
           resumeData: { ...state.resumeData, ...data },
+        })),
+
+      replaceResumeData: (data) =>
+        set(() => ({
+          resumeData: data,
         })),
 
       setStyleConfig: (config) =>
