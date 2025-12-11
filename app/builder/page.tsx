@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+
 import TemplateRenderer from "@/components/templates/TemplateRenderer";
 import TemplateSelector from "@/components/templates/TemplateSelector";
 import FileUploader from "@/components/upload/FileUploader";
@@ -24,10 +26,19 @@ import {
 import { generatePDFFromHTML } from "@/lib/utils/pdfGenerator";
 
 export default function BuilderPage() {
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<"edit" | "template" | "style">(
     "edit"
   );
   const [showUploader, setShowUploader] = useState(false);
+
+  // Check if upload parameter is present on page load
+  useEffect(() => {
+    const shouldShowUpload = searchParams.get("upload") === "true";
+    if (shouldShowUpload) {
+      setShowUploader(true);
+    }
+  }, [searchParams]);
 
   const handleDownloadPDF = async () => {
     try {
@@ -83,6 +94,13 @@ export default function BuilderPage() {
               <FiDownload />
               <span className="hidden sm:inline">Download PDF</span>
             </button>
+
+            {/* User Profile Placeholder */}
+            <div className="h-8 w-8 sm:h-10 sm:w-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-xs sm:text-sm font-semibold">
+                U
+              </span>
+            </div>
           </div>
         </div>
       </header>

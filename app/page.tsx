@@ -1,15 +1,45 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
   const router = useRouter();
+  const { isSignedIn, isLoaded } = useUser();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Redirect to sign-in page on home page load
-    router.push("/sign-in");
-  }, [router]);
+    const handleAuth = async () => {
+      try {
+        if (isLoaded) {
+          if (isSignedIn) {
+            router.push("/dashboard");
+          } else {
+            router.push("/sign-in");
+          }
+        }
+      } catch (err) {
+        console.error("Authentication error:", err);
+        setError("Authentication configuration error");
+        router.push("/auth-error");
+      }
+    };
+
+    handleAuth();
+  }, [router, isSignedIn, isLoaded]);
+
+  // If there's an error, show it
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="text-white text-center">
+          <p className="text-xl mb-4">Authentication Error</p>
+          <p className="text-gray-300">Redirecting to setup page...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Show loading state while redirecting
   return (
